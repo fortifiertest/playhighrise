@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="PostgreSQL - highrise@localhost" uuid="c23e4294-6b49-4489-9a2c-157ab6cf536c">
+    <database-info product="PostgreSQL" version="9.5.3" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
+      <database id="1" name="postgres"/>
+      <database id="2" name="highrise"/>
+      <schema id="3" parent="1" name="public">
+        <object-id>2200</object-id>
+        <comment>standard public schema</comment>
+        <introspection-timestamp>2016-07-22.16:06:22.203</introspection-timestamp>
+      </schema>
+      <schema id="4" parent="2" name="public">
+        <object-id>2200</object-id>
+        <comment>standard public schema</comment>
+        <introspection-state-number>1294</introspection-state-number>
+        <introspection-timestamp>2016-07-22.16:10:18.476</introspection-timestamp>
+      </schema>
+      <sequence id="5" parent="4" name="person_id_seq">
+        <object-id>17870</object-id>
+        <state-number>1292</state-number>
+      </sequence>
+      <sequence id="6" parent="4" name="personTag_id_seq">
+        <object-id>17892</object-id>
+        <state-number>1294</state-number>
+      </sequence>
+      <sequence id="7" parent="4" name="tag_id_seq">
+        <object-id>17881</object-id>
+        <state-number>1293</state-number>
+      </sequence>
+      <table id="8" parent="4" name="person">
+        <object-id>17872</object-id>
+        <state-number>1294</state-number>
+      </table>
+      <table id="9" parent="4" name="personTag">
+        <object-id>17894</object-id>
+        <state-number>1294</state-number>
+      </table>
+      <table id="10" parent="4" name="tag">
+        <object-id>17883</object-id>
+        <state-number>1294</state-number>
+      </table>
+      <column id="11" parent="8" name="id">
+        <state-number>1292</state-number>
+        <mandatory>1</mandatory>
+        <data-type>bigint</data-type>
+        <default-expression>nextval(&apos;person_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="12" parent="8" name="firstname">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="13" parent="8" name="lastname">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="14" parent="8" name="title">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="15" parent="8" name="background">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="16" parent="8" name="linkedinurl">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="17" parent="8" name="avatarurl">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="18" parent="8" name="companyid">
+        <state-number>1292</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="19" parent="8" name="companyname">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="20" parent="8" name="createdat">
+        <state-number>1292</state-number>
+        <data-type>timestamp with time zone</data-type>
+      </column>
+      <column id="21" parent="8" name="updatedat">
+        <state-number>1292</state-number>
+        <data-type>timestamp with time zone</data-type>
+      </column>
+      <column id="22" parent="8" name="visibleto">
+        <state-number>1292</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="23" parent="8" name="authorid">
+        <state-number>1292</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="24" parent="8" name="groupid">
+        <state-number>1292</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="25" parent="8" name="ownerid">
+        <state-number>1292</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="26" parent="8" name="person_pkey">
+        <object-id>17879</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="27" parent="8" name="person_pkey">
+        <columns>id</columns>
+        <underlying-index>person_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="28" parent="9" name="id">
+        <state-number>1294</state-number>
+        <mandatory>1</mandatory>
+        <data-type>bigint</data-type>
+        <default-expression>nextval(&apos;&quot;personTag_id_seq&quot;&apos;::regclass)</default-expression>
+      </column>
+      <column id="29" parent="9" name="personid">
+        <state-number>1294</state-number>
+        <data-type>bigint</data-type>
+      </column>
+      <column id="30" parent="9" name="tagid">
+        <state-number>1294</state-number>
+        <data-type>bigint</data-type>
+      </column>
+      <index id="31" parent="9" name="personTag_pkey">
+        <object-id>17898</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="32" parent="9" name="personTag_pkey">
+        <columns>id</columns>
+        <underlying-index>personTag_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="33" parent="9" name="fk_persontag_person">
+        <columns>personid</columns>
+        <ref-key>~.person.person_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="34" parent="9" name="fk_persontag_tag">
+        <columns>tagid</columns>
+        <ref-key>~.tag.tag_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="35" parent="10" name="id">
+        <state-number>1293</state-number>
+        <mandatory>1</mandatory>
+        <data-type>bigint</data-type>
+        <default-expression>nextval(&apos;tag_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="36" parent="10" name="name">
+        <state-number>1293</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="37" parent="10" name="tag_pkey">
+        <object-id>17890</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="38" parent="10" name="tag_pkey">
+        <columns>id</columns>
+        <underlying-index>tag_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>

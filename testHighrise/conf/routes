@@ -1,0 +1,8 @@
+GET     /                                       HighRiseController.index
+GET     /people/{tagId}                         HighRiseController.getPeople
+
+GET     /favicon.ico                            404
+
+GET     /public/                                staticDir:public
+
+*       /{controller}/{action}                  {controller}.{action}
