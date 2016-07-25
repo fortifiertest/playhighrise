@@ -17,11 +17,9 @@ public class Person {
     @Attribute(name = "type", required = false)
     private String type;
 
-    @Required
     @Element(name="first-name")
     private String firstName;
 
-    @Required
     @Element(name="last-name")
     private String lastName;
 
@@ -31,43 +29,33 @@ public class Person {
     @Element(name="background", required = false)
     private String background;
 
-    @Required
     @Element(name="linkedin-url", required = false)
     private String linkedinUrl;
 
-    @Required
     @Element(name="avatar_url")
     private String avatarUrl;
 
-    @Required
     @Element(name="company-id", required = false)
     private Integer companyId;
 
-    @Required
     @Element(name="company-name", required = false)
     private String companyName;
 
-    @Required
     @Element(name="created-at")
     private String createdAt;
 
-    @Required
     @Element(name="updated-at")
     private String updatedAt;
 
-    @Required
     @Element(name="visible-to")
     private String visibleTo;
 
-    @Required
     @Element(name="author-id")
     private Integer authorId;
 
-    @Required
     @Element(name="group-id", required = false)
     private Integer groupId;
 
-    @Required
     @Element(name="owner-id", required = false)
     private Integer ownerId;
 

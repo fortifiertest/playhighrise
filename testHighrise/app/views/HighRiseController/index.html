@@ -1,6 +1,6 @@
 #{set title:'Home' /}
 
-<form action="@{HighRiseController.getPeople()}" method="GET">
+<form action="@{HighRiseController.findPeopleById()}" method="GET">
     <input type="number" name="tagId" />
     <input type="submit" value="Get people data" />
 </form>

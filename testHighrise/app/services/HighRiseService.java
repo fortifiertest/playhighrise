@@ -1,6 +1,6 @@
 package services;
 
-import db.HighRiseDAO;
+import db.DBProvider;
 import models.*;
 import org.simpleframework.xml.core.Persister;
 import play.Logger;
@@ -9,32 +9,29 @@ import java.util.*;
 
 import static configurations.HighRiseConfiguration.*;
 
-public class HighRiseService  {
+public class HighRiseService {
 
-    HighRiseDAO dao = new HighRiseDAO();
+    DBProvider dbProvider = new DBProvider();
 
-    public List<Person> getPerson(Long tagId) {
-        People p = readData(tagId);
-        dao.insertPeople(p);
-        return p.getPersons();
+    public void addPersons(Set<Person> persons) {
+        dbProvider.addPersons(persons);
     }
 
-    public Set<Person> getPeopleByTag(String tagName) {
-        return dao.findPersons(tagName);
+    public Set<Person> findPersons(String tagName) {
+        return dbProvider.findPersons(tagName);
     }
 
-    private People readData(Long tagId) {
+    public Set<Person> findPersonsAPI(Long tagId) {
         Client client = ClientBuilder.newClient();
-        String  response = client.target(HIGH_RISE_URL + "?tag_id=" + tagId).request()
-            .header("Authorization", HIGH_RISE_AUTH_CODE).get(String.class);
-        People people = null;
+        String response = client.target(HIGH_RISE_URL + "?tag_id=" + tagId).request()
+                .header("Authorization", HIGH_RISE_AUTH_CODE).get(String.class);
 
         try {
-            people = new Persister().read(People.class, response);
+            return new Persister().read(People.class, response).getPersons();
         } catch (Exception ex) {
             Logger.error(ex.getMessage());
         }
 
-        return people;
+        return Collections.emptySet();
     }
 }

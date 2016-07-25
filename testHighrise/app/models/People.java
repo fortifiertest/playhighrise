@@ -2,6 +2,7 @@ package models;
 
 import org.simpleframework.xml.*;
 import java.util.List;
+import java.util.Set;
 
 @Root
 public class People {
@@ -10,15 +11,14 @@ public class People {
     private String type;
 
     @ElementList(name = "people", entry = "person", inline = true)
-    private List<Person> persons;
+    private Set<Person> persons;
 
-
-    public List<Person> getPersons() {
+    public Set<Person> getPersons() {
         return persons;
     }
 
-    public void setPersons(List<Person> elements) {
-        this.persons = elements;
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
     }
 
     public String getType() {

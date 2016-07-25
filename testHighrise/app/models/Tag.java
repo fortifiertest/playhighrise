@@ -12,7 +12,6 @@ public class Tag{
     @Element(name="id")
     private Integer id;
 
-    @Required
     @Element(name="name")
     private String name;
 

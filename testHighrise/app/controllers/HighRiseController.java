@@ -12,13 +12,15 @@ public class HighRiseController extends Controller {
         render();
     }
 
-    public static void getPeople(Long tagId) throws Exception {
-        List<Person> persons = service.getPerson(tagId);
+    public static void findPeopleById(Long tagId) throws Exception {
+        Set<Person> persons = service.findPersonsAPI(tagId);
+        if(!persons.isEmpty()) service.addPersons(persons);
+
         render(persons);
     }
 
-    public static void searchPeopleByTag(String tagName) throws Exception {
-        Set<Person> persons = service.getPeopleByTag(tagName);
+    public static void findPeopleByTag(String tagName) throws Exception {
+        Set<Person> persons = service.findPersons(tagName);
         render(persons);
     }
 }
