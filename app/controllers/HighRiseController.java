@@ -1,5 +1,6 @@
 package controllers;
 
+import play.Logger;
 import play.mvc.*;
 import java.util.*;
 import models.*;
@@ -12,15 +13,18 @@ public class HighRiseController extends Controller {
         render();
     }
 
-    public static void findPeopleById(Long tagId) throws Exception {
+    public static void findPeopleById(Long tagId){
+        Logger.info("Trying to get people from Highrise API by tag:" + tagId);
         Set<Person> persons = service.findPersonsAPI(tagId);
-        if(!persons.isEmpty()) service.addPersons(persons);
-
+        if(!persons.isEmpty()) Person.saveData(persons);
+        Logger.info("Find people:" + persons);
         render(persons);
     }
 
-    public static void findPeopleByTag(String tagName) throws Exception {
-        Set<Person> persons = service.findPersons(tagName);
+    public static void findPeopleByTag(String tagName){
+        Logger.info("Trying to people by tag:" + tagName);
+        List<Person> persons = Person.findData(tagName);
+        Logger.info("Find people:" + persons);
         render(persons);
     }
 }

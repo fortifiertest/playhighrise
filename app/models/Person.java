@@ -1,21 +1,29 @@
 package models;
 
-import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import play.data.validation.Required;
+import play.db.jpa.GenericModel;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.List;
+import java.util.Set;
 
+@Entity
 @Root(strict = false, name = "person")
-public class Person {
+public class Person extends GenericModel {
 
+    @Id
     @Required
     @Element(name="id")
     private Integer id;
 
-    @Attribute(name = "type", required = false)
-    private String type;
 
     @Element(name="first-name")
     private String firstName;
@@ -60,6 +68,11 @@ public class Person {
     private Integer ownerId;
 
     @ElementList(required = false)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name = "persontag", joinColumns = {
+        @JoinColumn(name = "personId", nullable = false, updatable = false) },
+        inverseJoinColumns = { @JoinColumn(name = "tagId",
+            nullable = false, updatable = false) })
     private List<Tag> tags;
 
 
@@ -119,13 +132,6 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getLastName() {
         return lastName;
@@ -191,12 +197,54 @@ public class Person {
         this.tags = tags;
     }
 
-    public String getType() {
-        return type;
+    @Override
+    public String toString() {
+        return "Person{" +
+            "authorId=" + authorId +
+            ", id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", title='" + title + '\'' +
+            ", background='" + background + '\'' +
+            ", linkedinUrl='" + linkedinUrl + '\'' +
+            ", avatarUrl='" + avatarUrl + '\'' +
+            ", companyId=" + companyId +
+            ", companyName='" + companyName + '\'' +
+            ", createdAt='" + createdAt + '\'' +
+            ", updatedAt='" + updatedAt + '\'' +
+            ", visibleTo='" + visibleTo + '\'' +
+            ", groupId=" + groupId +
+            ", ownerId=" + ownerId +
+            ", tags=" + tags +
+            '}';
+    }
+    public Integer getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
+    @Override
+    public Object _key() {
+        return getId();
+    }
+
+    public static void saveData(Set<Person> persons){
+        for(Person p: persons){
+            Person person = Person.findById(p.getId());
+            if(null == person){
+                for(Tag t: p.getTags()){
+                    Tag tag = Tag.findById(t.getId());
+                    if(null == tag) t.save();
+                }
+            }
+            p.save();
+        }
+    }
+
+    public static List<Person> findData(String tagName){
+        return  Person.find("SELECT p FROM Person p JOIN p.tags tag where tag.name = ?", tagName).fetch();
+    }
 }

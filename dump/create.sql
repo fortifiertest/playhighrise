@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "person" (
-  id                  integer PRIMARY KEY,
+  id            integer PRIMARY KEY,
   firstName           VARCHAR,
   lastName            VARCHAR,
   title               VARCHAR,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS "person" (
 );
 
 CREATE TABLE IF NOT EXISTS "tag" (
-  id                  integer PRIMARY KEY,
+  id               integer PRIMARY KEY,
   name                VARCHAR
 );
 
