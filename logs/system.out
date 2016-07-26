@@ -1,0 +1,6 @@
+Listening for transport dt_socket at address: 8000
+14:52:23,028 INFO  ~ Starting /Users/isila/testHighrise
+:: loading settings :: url = jar:file:/Users/isila/play-1.4.2/framework/lib/ivy-2.4.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
+14:52:25,697 WARN  ~ You're running Play! in DEV mode
+14:52:25,878 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+~ Server is up and running
