@@ -50,7 +50,6 @@ public class Tag extends GenericModel {
         return "Tag{" +
             "id=" + id +
             ", name='" + name + '\'' +
-            ", persons=" + persons +
             '}';
     }
 

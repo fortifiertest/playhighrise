@@ -5,6 +5,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import play.data.validation.Required;
 import play.db.jpa.GenericModel;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,58 +22,58 @@ public class Person extends GenericModel {
 
     @Id
     @Required
-    @Element(name="id")
+    @Element(name = "id")
     private Integer id;
 
 
-    @Element(name="first-name")
+    @Element(name = "first-name")
     private String firstName;
 
-    @Element(name="last-name")
+    @Element(name = "last-name")
     private String lastName;
 
-    @Element(name="title", required = false)
+    @Element(name = "title", required = false)
     private String title;
 
-    @Element(name="background", required = false)
+    @Element(name = "background", required = false)
     private String background;
 
-    @Element(name="linkedin-url", required = false)
+    @Element(name = "linkedin-url", required = false)
     private String linkedinUrl;
 
-    @Element(name="avatar_url")
+    @Element(name = "avatar_url")
     private String avatarUrl;
 
-    @Element(name="company-id", required = false)
+    @Element(name = "company-id", required = false)
     private Integer companyId;
 
-    @Element(name="company-name", required = false)
+    @Element(name = "company-name", required = false)
     private String companyName;
 
-    @Element(name="created-at")
+    @Element(name = "created-at")
     private String createdAt;
 
-    @Element(name="updated-at")
+    @Element(name = "updated-at")
     private String updatedAt;
 
-    @Element(name="visible-to")
+    @Element(name = "visible-to")
     private String visibleTo;
 
-    @Element(name="author-id")
+    @Element(name = "author-id")
     private Integer authorId;
 
-    @Element(name="group-id", required = false)
+    @Element(name = "group-id", required = false)
     private Integer groupId;
 
-    @Element(name="owner-id", required = false)
+    @Element(name = "owner-id", required = false)
     private Integer ownerId;
 
     @ElementList(required = false)
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "persontag", joinColumns = {
-        @JoinColumn(name = "personId", nullable = false, updatable = false) },
-        inverseJoinColumns = { @JoinColumn(name = "tagId",
-            nullable = false, updatable = false) })
+        @JoinColumn(name = "personId", nullable = false, updatable = false)},
+        inverseJoinColumns = {@JoinColumn(name = "tagId",
+            nullable = false, updatable = false)})
     private List<Tag> tags;
 
 
@@ -215,9 +216,9 @@ public class Person extends GenericModel {
             ", visibleTo='" + visibleTo + '\'' +
             ", groupId=" + groupId +
             ", ownerId=" + ownerId +
-            ", tags=" + tags +
             '}';
     }
+
     public Integer getId() {
         return id;
     }
@@ -231,20 +232,20 @@ public class Person extends GenericModel {
         return getId();
     }
 
-    public static void saveData(Set<Person> persons){
-        for(Person p: persons){
+    public static void saveData(Set<Person> persons) {
+        for (Person p : persons) {
             Person person = Person.findById(p.getId());
-            if(null == person){
-                for(Tag t: p.getTags()){
-                    Tag tag = Tag.findById(t.getId());
-                    if(null == tag) t.save();
-                }
+            for (Tag t : p.getTags()) {
+                Tag tag = Tag.findById(t.getId());
+                if (null == tag) t.save();
             }
-            p.save();
+            if (null == person) {
+                p.save();
+            }
         }
     }
 
-    public static List<Person> findData(String tagName){
-        return  Person.find("SELECT p FROM Person p JOIN p.tags tag where tag.name = ?", tagName).fetch();
+    public static List<Person> findData(String tagName) {
+        return Person.find("SELECT p FROM Person p JOIN p.tags tag where tag.name = ?", tagName).fetch();
     }
 }
